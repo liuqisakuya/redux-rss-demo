@@ -1,6 +1,6 @@
 {
-  "name": "redux-blog",
-  "version": "1.0.0",
+  "name": "redux-rss-demo",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
