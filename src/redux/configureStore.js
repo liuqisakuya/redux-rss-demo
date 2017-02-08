@@ -1,26 +1,31 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import { hashHistory } from 'react-router';
-import ThunkMiddleware from 'redux-thunk';
 import createFetchMiddleware from 'redux-composable-fetch';
 import rootReducer from './reducers';
 // import DevTools from './DevTools';
 
-//console.log('rootReducer', rootReducer);
 const FetchMiddleware = createFetchMiddleware({
   afterFetch({ action, result }) {
-    //console.log('action', action, result);
     return result.json().then(data => {
       return Promise.resolve({
-        action,
-        result: data,
+          action,
+          result: data,
       });
     });
   },
 });
+
+const logger = store => next => action => {
+  console.log('dispatching', action)
+  let result = next(action)
+  console.log('next state', store.getState())
+  return result
+}
+
 const finalCreateStore = compose(
-  applyMiddleware(ThunkMiddleware, FetchMiddleware, routerMiddleware(hashHistory)),
-  // DevTools.instrument()
+  applyMiddleware(logger,FetchMiddleware, routerMiddleware(hashHistory)),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
 const reducer = combineReducers(Object.assign({}, rootReducer, {

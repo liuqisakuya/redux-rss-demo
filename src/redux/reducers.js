@@ -1,6 +1,6 @@
 
 import { combineReducers } from 'redux';
-import {LOAD_ARTICLES, LOAD_ARTICLES_SUCCESS, LOAD_ARTICLES_ERROR, LOAD_MORE, URL, more, loadArticles} from './action'
+import { LOAD_ARTICLES, LOAD_ARTICLES_SUCCESS, LOAD_ARTICLES_ERROR, LOAD_MORE_ARTICLE, LOAD_MORE_ARTICLES_SUCCESS, LOAD_MORE, LOAD_MORE_ARTICLES_ERROR, LOAD_ONE_ARTICLE, LOAD_ONE_ARTICLES_SUCCESS, LOAD_ONE_ARTICLES_ERROR, URL, more, loadArticles, loadOneArticle } from './action'
 
 const initialState = {
   loading: true,
@@ -9,24 +9,61 @@ const initialState = {
   page: 1,
 };
 
+const oneInitialState = {
+  data: {},
+  success: false,
+}
 
-
-function moreList(state, action) {
-
+function moreList(state = initialState, action) {
   switch (action.type) {
-    case LOAD_MORE: {
-      //console.log('statettetetete', state, action);
+    case LOAD_MORE_ARTICLE: {
+      return state
+    }
+
+    case LOAD_MORE_ARTICLES_SUCCESS: {
+      console.log('LOAD_MOREARTICLES_SUCCESS',action.payload, {
+        ...state
+      });
       return {
-        data: state.concat(action.payload),
-        success: true,
-      }
+        ...state,
+        loading: false,
+        error: false,
+        articleList: action.payload,
+      };
+    }
+
+    case LOAD_MORE_ARTICLES_ERROR: {
+      return state
     }
 
     default:
+      return state;
+  }
+}
+
+function oneArticle(state = oneInitialState, action) {
+
+  switch (action.type) {
+    case LOAD_ONE_ARTICLE: {
       return {
-        data: state,
-        success: true,
+        ...state,
+        loading: true,
       };
+    }
+
+    case LOAD_ONE_ARTICLES_SUCCESS: {
+      console.log('knknskdhs');
+      return action.payload;
+    }
+
+    case LOAD_ONE_ARTICLES_ERROR: {
+      return {
+        ...state,
+      };
+    }
+
+    default:
+      return state;
   }
 }
 
@@ -42,6 +79,9 @@ function list(state = initialState, action) {
     }
 
     case LOAD_ARTICLES_SUCCESS: {
+      console.log('LOAD_ARTICLES_SUCCESS',action.payload, {
+        ...state
+      });
       return {
         ...state,
         loading: false,
@@ -57,15 +97,6 @@ function list(state = initialState, action) {
       };
     }
 
-    case LOAD_MORE: {
-      return {
-        ...state,
-        loading: false,
-        error: false,
-        articleList: moreList(state.articleList, action),
-      };
-    }
-
     default:
       return state;
   }
@@ -76,5 +107,9 @@ function list(state = initialState, action) {
 export default {
   home: combineReducers({
     list,
+    moreList,
   }),
+  detail: combineReducers({
+    oneArticle
+  })
 };

@@ -9,7 +9,6 @@ export default class Nav extends Component {
       <nav>
         <Link to="/">返回首页</Link>
       </nav>
-      {/* <button >加载更多</button> */}
       </div>
     )
   }

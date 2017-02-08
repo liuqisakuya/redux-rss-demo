@@ -15,7 +15,6 @@ export default class PreviewList extends Component {
 
   render() {
     const { loading, error, articleList} = this.props;
-    //console.log('PreviewList', this.props);
     if (error) {
       return <p className="message">Oops, something is wrong.</p>
     }
@@ -28,7 +27,7 @@ export default class PreviewList extends Component {
         {articleList.data.map(item => {
          return (
            <li className="list-item" key={item.id}>
-             <Preview {...item} key={item.id} push={this.props.push} more={this.props.more} />
+             <Preview {...item} key={item.id} push={this.props.push} more={this.props.more} loadOneArticle={this.props.loadOneArticle} />
            </li>
          )
        })}

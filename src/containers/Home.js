@@ -6,10 +6,11 @@ import { listActions } from '../redux/action';
 import { push } from 'react-router-redux';
 
 class Home extends Component {
+
   render() {
-    //console.log('home', this.props);
     return (
       <div>
+        <button onClick={this.props.listActions.more}>加载更多</button>
         <PreviewList
         {...this.props.list}
         {...this.props.listActions}
@@ -21,7 +22,6 @@ class Home extends Component {
 }
 
 export default connect(state => {
-  console.log('state', state);
   return {
     list: state.home.list,
   };

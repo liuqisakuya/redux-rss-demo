@@ -9,25 +9,21 @@ import '../styles/Detail.css'
 class Detail extends Component {
 
   render() {
+    // console.log('Detail', this.props);
     return (
       <div style={{maxWidth: '100vw'}}  className="showMyBlog" id="detail">
-        <Article {...this.props} />
+        <Article
+        {...this.props}
+        {...this.props.listActions}
+         />
       </div>
     )
   }
 }
 
 export default connect(state => {
-
-  let pathname = state.routing.locationBeforeTransitions.pathname.replace(/\/detail\//, '');
-  let list = state.home.list.articleList.data.filter(item => {
-    if (item.id === pathname) {
-      return item
-    }
-  })
-  
   return {
-    list: list[0],
+    detail: state.detail.oneArticle.data
   }
 }, dispatch => {
   return {
