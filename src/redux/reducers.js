@@ -5,7 +5,10 @@ import { LOAD_ARTICLES, LOAD_ARTICLES_SUCCESS, LOAD_ARTICLES_ERROR, LOAD_MORE_AR
 const initialState = {
   loading: true,
   error: false,
-  articleList: [],
+  articleList: {
+    data: [],
+    success: false,
+  },
   page: 1,
 };
 
@@ -21,18 +24,20 @@ function moreList(state = initialState, action) {
     }
 
     case LOAD_MORE_ARTICLES_SUCCESS: {
-      console.log('LOAD_MOREARTICLES_SUCCESS',action.payload, {
-        ...state
-      });
       return {
         ...state,
+        page: state.page + 1,
         loading: false,
         error: false,
-        articleList: action.payload,
+        articleList: {
+          ...action.payload,
+          data: action.morestate.concat(action.payload.data)
+        },
       };
     }
 
     case LOAD_MORE_ARTICLES_ERROR: {
+
       return state
     }
 

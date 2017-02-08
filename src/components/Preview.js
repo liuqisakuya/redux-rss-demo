@@ -8,16 +8,12 @@ class Preview extends React.Component {
   };
 
   handleNavigate(id, e) {
-      // 阻止原生链接跳转
       e.preventDefault();
-      // 使用 react-router-redux 提供的方法跳转，以便更新对应的 store
-      // this.props.push(`/detail/${id}`);
       this.props.push(`/detail/${id}`);
 
   }
 
   render() {
-    // //console.log('Preview', this.props);
     return (
       <article className="article-preview-item">
         <h1 className="title">

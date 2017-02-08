@@ -4,6 +4,7 @@ import configureStore from './redux/configureStore';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { hashHistory } from 'react-router';
+import { loadOneArticle } from './redux/action';
 import routes from './routes';
 import './styles/reset.css';
 import './styles/Frame.css';

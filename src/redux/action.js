@@ -9,12 +9,20 @@ export const LOAD_MORE = 'LOAD_MORE';
 export const LOAD_MORE_ARTICLE = 'LOAD_MORE_ARTICLE';
 export const LOAD_MORE_ARTICLES_SUCCESS = 'LOAD_MORE_ARTICLES_SUCCESS';
 export const LOAD_MORE_ARTICLES_ERROR = 'LOAD_MORE_ARTICLES_ERROR';
-export let URL = `https://cnodejs.org/api/v1/topics?mdrender='true'&&tab=share&&page=1&&limit=20`
+let page = 1;
+export let URL = `https://cnodejs.org/api/v1/topics?mdrender='true'&&tab=share&&page=1&&limit=10`
 
-export function more() {
+export function more(morestate = {
+  loading: true,
+  error: false,
+  articleList: [],
+  page: 1,
+}, page) {
   return {
     types: [LOAD_MORE_ARTICLE, LOAD_MORE_ARTICLES_SUCCESS, LOAD_MORE_ARTICLES_ERROR],
-    url: URL.replace(/(.*page=)([0-9]+)(.*)/, "$1"+(+URL.match(/.*page=([0-9]+)/)[1]+1)+"$3"),
+    url: `https://cnodejs.org/api/v1/topics?mdrender='true'&&tab=share&&page=${page}&&limit=10`,
+    //  URL.replace(/(.*page=)([0-9]+)(.*)/, "$1"+(+URL.match(/.*page=([0-9]+)/)[1]+1)+"$3"),
+    morestate,
   }
 }
 

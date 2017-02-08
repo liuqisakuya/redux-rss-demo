@@ -9,7 +9,6 @@ import '../styles/Detail.css'
 class Detail extends Component {
 
   render() {
-    // console.log('Detail', this.props);
     return (
       <div style={{maxWidth: '100vw'}}  className="showMyBlog" id="detail">
         <Article

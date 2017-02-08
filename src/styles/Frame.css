@@ -4,10 +4,21 @@ body{
     background-color: #f7eed6;
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
+.header {
+  position: fixed;
+  top: 0;
+  display: block;
+  width: 800px;
+  background-color: #ddd
+}
+.container {
+  margin-top: 30px;
+}
 .nav {
+
   height:30px;
   vertical-align: middle;
-  background-color: #ddd
+
 }
 .nav a{
   display: block;
